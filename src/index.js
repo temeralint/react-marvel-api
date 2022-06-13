@@ -8,7 +8,7 @@ const marvelService = new MarvelService()
 
 marvelService.getAllCharacters().then(res => res.data.results.forEach(item => console.log(item.name)))
 
-// marvelService.getCharacter(1011196).then(res => console.log(res.data.results))
+marvelService.getCharacter(1011196).then(res => console.log(res.data.results))
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
