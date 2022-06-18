@@ -50,11 +50,11 @@ class CharList extends Component {
 
 function View({data}) {
     return (
-        data.map((item, index) => {
-            const {name, thumbnail, thumbnailStyle} = item
+        data.map(item => {
+            const {id, name, thumbnail, thumbnailStyle} = item
 
             return (
-                <li className="char__item" key={index}>
+                <li className="char__item" key={id}>
                     <img src={thumbnail} alt="char" style={{objectFit: thumbnailStyle}}/>
                     <div className="char__name">{name}</div>
                 </li>

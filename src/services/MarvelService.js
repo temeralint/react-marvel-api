@@ -27,9 +27,10 @@ class MarvelService {
         const descr = checkEmptyDescr.length > 200 ? `${checkEmptyDescr.slice(0, 200)}...` : checkEmptyDescr
         const thumbnail = `${character.thumbnail.path}.${character.thumbnail.extension}`
         const notFoundImg = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        const thumbnailStyle = thumbnail === notFoundImg ? 'contain' : 'cover'
-        
+        const thumbnailStyle = thumbnail === notFoundImg ? 'unset' : 'cover'
+
         return {
+            id: character.id,
             name: character.name,
             descr,
             thumbnail,
