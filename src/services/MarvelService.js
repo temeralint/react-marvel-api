@@ -37,6 +37,7 @@ class MarvelService {
             thumbnailStyle,
             homepage: character.urls[0].url,
             wiki: character.urls[1].url,
+            comics: character.comics.items.slice(0, 10)
         }
     }
 }
