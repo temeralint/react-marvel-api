@@ -69,7 +69,7 @@ function View({data, setId}) {
     return (
         data.map(item => {
             const {id, name, thumbnail, thumbnailStyle} = item
-            
+
             return (
                 <li 
                     className="char__item" 

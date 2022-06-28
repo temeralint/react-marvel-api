@@ -21,13 +21,20 @@ class App extends Component {
             <div className="app">
                 <AppHeader/>
                 <main>
-                    <RandomChar/>
+                    <ErrorBoundary>
+                        <RandomChar/>
+                    </ErrorBoundary>
+
                     <div className="char__content">
-                        <CharList setId={this.setId}/>
+                        <ErrorBoundary>
+                            <CharList setId={this.setId}/>
+                        </ErrorBoundary>
+            
                         <ErrorBoundary>
                             <CharInfo id={id}/>
                         </ErrorBoundary>
                     </div>
+                    
                 </main>
             </div>
         )
