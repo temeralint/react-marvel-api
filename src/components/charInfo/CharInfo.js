@@ -29,8 +29,7 @@ class CharInfo extends Component {
     }
     
     updateChar = () => {
-        const id = this.props.id
-
+        const {id} = this.props
         if (!id) {
             return
         }
@@ -38,6 +37,8 @@ class CharInfo extends Component {
         this.marvelService.getCharacter(id)
                                         .then(this.onCharLoaded)
                                         .catch(this.onError)
+
+        this.errorM.err = 123
     }
 
     onCharLoading = () => {
@@ -88,10 +89,10 @@ function View({char}) {
                 <div>
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
-                        <a href={homepage} className="button button__main">
+                        <a href={homepage} className="button button__main" target="_blank">
                             <div className="inner">homepage</div>
                         </a>
-                        <a href={wiki} className="button button__secondary">
+                        <a href={wiki} className="button button__secondary" target="_blank">
                             <div className="inner">Wiki</div>
                         </a>
                     </div>

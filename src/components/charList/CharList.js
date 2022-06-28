@@ -48,7 +48,7 @@ class CharList extends Component {
         const spinner = loading ? <Spinner/> : null
         const content = spinner === null ? <View data={char} setId={this.props.setId}/> : null 
         const errorMessage = error ? <ErrorMessage/> : null
-        
+
         return (
             <div className="char__list">
                 <ul className="char__grid">
@@ -69,7 +69,7 @@ function View({data, setId}) {
     return (
         data.map(item => {
             const {id, name, thumbnail, thumbnailStyle} = item
-
+            
             return (
                 <li 
                     className="char__item" 
