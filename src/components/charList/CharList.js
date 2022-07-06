@@ -6,34 +6,29 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './charList.scss';
 
 class CharList extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            char: {},
-            loading: true,
-            error: false
-        }
+    state = {
+        char: [],
+        loading: true,
+        error: false,
+        newItemLoading: false,
+        offset: 210
     }
 
     marvelService = new MarvelService()
 
     componentDidMount() {
-        this.getChar()
+        this.onRequest()
     }
 
-    getChar = () => {
-        this.marvelService.getAllCharacters()
-                                            .then(this.updateChar)
-                                            .catch(this.onError)
-    }
-
-    updateChar = (char) => {
-        this.setState({
-            char,
+    updateChar = (newChar) => {
+        this.setState(({offset, char}) => ({
+            char: [...char, ...newChar],
+            error: false,
             loading: false,
-            error: false
+            newItemLoading: false,
+            offset: offset + 9    
         })
-    }
+    )}
 
     onError = () => {
         this.setState({
@@ -43,8 +38,21 @@ class CharList extends Component {
         })
     }
 
+    onRequest = (offset) => {
+        this.onCharListLoading()
+        this.marvelService.getAllCharacters(offset)
+                                            .then(this.updateChar)
+                                            .catch(this.onError)
+    }
+
+    onCharListLoading = () => {
+        this.setState({
+            newItemLoading: true,
+        })
+    }
+
     render() {
-        const {char, loading, error} = this.state
+        const {char, loading, error, newItemLoading, offset} = this.state
         const spinner = loading ? <Spinner/> : null
         const content = spinner === null ? <View data={char} setId={this.props.setId}/> : null 
         const errorMessage = error ? <ErrorMessage/> : null
@@ -57,7 +65,11 @@ class CharList extends Component {
                     {errorMessage}
                 </ul>
         
-                <button className="button button__main button__long">
+                <button 
+                    className="button button__main button__long" 
+                    onClick={() => this.onRequest(offset)}
+                    disabled={newItemLoading}
+                >
                     <div className="inner">load more</div>
                 </button>
             </div>
